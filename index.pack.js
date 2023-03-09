@@ -542,7 +542,12 @@ function Meme() {
         var randomNumber = Math.floor(Math.random() * memesArray.length);
         var url = memesArray[randomNumber].url;
 
-        setMeme({ randomImage: url }); // need to use spread operator to bring in properties from previous state
+        setMeme({ randomImage: url });
+        // should use spread operator to bring in properties from previous state
+        // setMeme(prevMeme => ({
+        //     ...prevMeme,
+        //     randomImage: url
+        // }))
     }
 
     return _react2.default.createElement(
