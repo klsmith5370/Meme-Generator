@@ -53,3 +53,7 @@ main {
     grid-template: 40px 40px / 1fr 1fr;
     gap: 17px;
 }
+
+.meme--image {
+    max-width: 100%;
+}
