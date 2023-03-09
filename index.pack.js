@@ -521,16 +521,30 @@ var _memesData2 = _interopRequireDefault(_memesData);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Meme() {
-    var _React$useState = _react2.default.useState(""),
+    var _React$useState = _react2.default.useState({
+        topText: "",
+        bottomText: "",
+        randomImage: "http://i.imgflip.com/1bij.jpg"
+
+    }),
         _React$useState2 = _slicedToArray(_React$useState, 2),
-        memeImage = _React$useState2[0],
-        setMemeImage = _React$useState2[1];
+        meme = _React$useState2[0],
+        setMeme = _React$useState2[1];
+
+    var _React$useState3 = _react2.default.useState(_memesData2.default),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        memeImages = _React$useState4[0],
+        setMemeImages = _React$useState4[1];
 
     function getMemeImage() {
         // click event handler for getting a random image
-        var memesArray = _memesData2.default.data.memes;
+        var memesArray = memeImages.data.memes;
         var randomNumber = Math.floor(Math.random() * memesArray.length);
-        setMemeImage(memesArray[randomNumber].url);
+        var url = memesArray[randomNumber].url;
+
+        setMeme(function (prevMeme) {
+            return { randomImage: url };
+        });
     }
 
     return _react2.default.createElement(
@@ -546,7 +560,7 @@ function Meme() {
                 { onClick: getMemeImage, className: "form--button" },
                 "Get a new meme image"
             ),
-            _react2.default.createElement("img", { src: memeImage, className: "meme--image" })
+            _react2.default.createElement("img", { src: meme.randomImage, className: "meme--image" })
         )
     );
 }
