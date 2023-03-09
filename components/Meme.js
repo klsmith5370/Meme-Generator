@@ -16,7 +16,12 @@ export default function Meme() {
         const randomNumber = Math.floor(Math.random() * memesArray.length)
         const url = memesArray[randomNumber].url
         
-        setMeme(prevMeme => ({ ...prevMeme, randomImage: url })) // need to use spread operator to bring in properties from previous state
+        setMeme({ randomImage: url }) 
+        // should use spread operator to bring in properties from previous state
+        // setMeme(prevMeme => ({
+        //     ...prevMeme,
+        //     randomImage: url
+        // }))
     }
 
     return (
