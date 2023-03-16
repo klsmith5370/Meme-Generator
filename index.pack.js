@@ -520,6 +520,8 @@ var _memesData2 = _interopRequireDefault(_memesData);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function Meme() {
     var _React$useState = _react2.default.useState({
         topText: "",
@@ -542,7 +544,6 @@ function Meme() {
         var randomNumber = Math.floor(Math.random() * memesArray.length);
         var url = memesArray[randomNumber].url;
 
-        // setMeme({ randomImage: url }) 
         // should use spread operator to bring in properties from previous state
         setMeme(function (prevMeme) {
             return {
@@ -552,20 +553,61 @@ function Meme() {
         });
     }
 
+    function handleChange(event) {
+        var _event$target = event.target,
+            name = _event$target.name,
+            value = _event$target.value;
+
+        setMeme(function (prevMeme) {
+            return _defineProperty({
+                prevMeme: prevMeme
+            }, name, value);
+        });
+    }
+
     return _react2.default.createElement(
         "main",
         null,
         _react2.default.createElement(
             "div",
             { className: "form" },
-            _react2.default.createElement("input", { type: "text", placeholder: "Top text", className: "form--input" }),
-            _react2.default.createElement("input", { type: "text", placeholder: "Bottom text", className: "form--input" }),
+            _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Top text",
+                className: "form--input",
+                name: "topText",
+                value: meme.topText,
+                onChange: handleChange
+            }),
+            _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Bottom text",
+                className: "form--input",
+                name: "bottomText",
+                value: meme.bottomText,
+                onChange: handleChange
+
+            }),
             _react2.default.createElement(
                 "button",
                 { onClick: getMemeImage, className: "form--button" },
                 "Get a new meme image"
             ),
-            _react2.default.createElement("img", { src: meme.randomImage, className: "meme--image" })
+            _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement("img", { src: meme.randomImage, className: "meme--image" }),
+                _react2.default.createElement(
+                    "h2",
+                    { className: "meme--text top", value: true },
+                    meme.topText
+                ),
+                _react2.default.createElement(
+                    "h2",
+                    { className: "meme--text bottom" },
+                    meme.bottomText
+                )
+            )
         )
     );
 }
