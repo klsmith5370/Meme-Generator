@@ -18,7 +18,7 @@ export default function Meme() {
         
         // should use spread operator to bring in properties from previous state
         setMeme(prevMeme => ({
-            prevMeme,
+            ...prevMeme,
             randomImage: url
         }))
     }
@@ -26,7 +26,7 @@ export default function Meme() {
     function handleChange(event) {
         const {name, value} = event.target
         setMeme(prevMeme => ({
-            prevMeme,
+            ...prevMeme,
             [name]: value
         }))
     }
@@ -52,7 +52,7 @@ export default function Meme() {
                 
                 />
                 <button onClick={getMemeImage} className="form--button">Get a new meme image</button>
-                <div>
+                <div className="meme">
                     <img src={meme.randomImage} className="meme--image"/>
                     <h2 className="meme--text top" value>{meme.topText}</h2>
                     <h2 className="meme--text bottom">{meme.bottomText}</h2>
