@@ -18,7 +18,7 @@ export default function Meme() {
         
         // should use spread operator to bring in properties from previous state
         setMeme(prevMeme => ({
-            ...prevMeme,
+            prevMeme,
             randomImage: url
         }))
     }
@@ -26,7 +26,7 @@ export default function Meme() {
     function handleChange(event) {
         const {name, value} = event.target
         setMeme(prevMeme => ({
-            ...prevMeme,
+            prevMeme,
             [name]: value
         }))
     }
