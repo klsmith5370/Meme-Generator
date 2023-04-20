@@ -1,5 +1,5 @@
 import React from "react"
-import memesData from "../memesData"
+// import memesData from "../memesData"
 
 export default function Meme() {
     const [meme, setMeme] = React.useState({
@@ -9,12 +9,21 @@ export default function Meme() {
 
     })
 
-    const [memeImages, setMemeImages] = React.useState(memesData)
+    const [allMemes, setAllMemes] = React.useState([])
+
+    React.useEffect(() => {
+        fetch(`https://api.imgflip.com/get_memes`)
+            .then(res => res.json())
+            .then(data => setAllMemes(data.data.memes))
+    }, [])
+
+    console.log(allMemes)
+
 
     function getMemeImage() { // click event handler for getting a random image
-        const memesArray = memeImages.data.memes
-        const randomNumber = Math.floor(Math.random() * memesArray.length)
-        const url = memesArray[randomNumber].url
+        // const memesArray = allMemes.data.memes
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+        const url = allMemes[randomNumber].url
         
         // should use spread operator to bring in properties from previous state
         setMeme(prevMeme => ({
